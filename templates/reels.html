@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>WBSU Reels Competition 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a0f05;
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #2a1a0f;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(255, 120, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid rgba(255, 120, 0, 0.2);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a0a05 0%, #4a2510 50%, #3a1a0a 100%);
+            color: white;
+            padding: 25px 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 120, 0, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            margin-bottom: 5px;
+            text-shadow: 0 0 20px rgba(255, 120, 0, 0.5);
+            line-height: 1.2;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .competition-info {
+            background: linear-gradient(135deg, #2a1a0f 0%, #3a2a15 100%);
+            color: #ff7800;
+            padding: 12px 15px;
+            text-align: center;
+            font-weight: 500;
+            font-size: clamp(0.75rem, 2.5vw, 1rem);
+            line-height: 1.4;
+            border-top: 1px solid rgba(255, 120, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 120, 0, 0.2);
+            text-shadow: 0 0 10px rgba(255, 120, 0, 0.3);
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #3a2a15;
+            border-bottom: 2px solid rgba(255, 120, 0, 0.3);
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 12px 10px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: #b8956a;
+            transition: all 0.3s;
+            border: none;
+            background: none;
+            font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+            position: relative;
+        }
+
+        .nav-tab.active {
+            color: #ff7800;
+            background: #2a1a0f;
+            text-shadow: 0 0 10px rgba(255, 120, 0, 0.5);
+        }
+
+        .nav-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #ff7800;
+            box-shadow: 0 0 10px rgba(255, 120, 0, 0.5);
+        }
+
+        .content {
+            padding: 20px 15px;
+            background: #2a1a0f;
+        }
+
+        @media (min-width: 768px) {
+            .content {
+                padding: 30px;
+            }
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #e8cfa0;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid rgba(255, 120, 0, 0.3);
+            border-radius: 8px;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            transition: all 0.3s;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #1a0f05;
+            color: #e8cfa0;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #ff7800;
+            box-shadow: 0 0 15px rgba(255, 120, 0, 0.2);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #6b5040;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .file-upload {
+            border: 2px dashed rgba(255, 120, 0, 0.4);
+            border-radius: 8px;
+            padding: 20px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(255, 120, 0, 0.05);
+        }
+
+        @media (min-width: 768px) {
+            .file-upload {
+                padding: 30px;
+            }
+        }
+
+        .file-upload:hover {
+            background: rgba(255, 120, 0, 0.1);
+            border-color: #ff7800;
+            box-shadow: 0 0 20px rgba(255, 120, 0, 0.2);
+        }
+
+        .file-upload input {
+            display: none;
+        }
+
+        .file-upload p {
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            color: #b8956a;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #ff7800 0%, #ff6000 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            -webkit-tap-highlight-color: transparent;
+            box-shadow: 0 5px 20px rgba(255, 120, 0, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 96, 0, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .reels-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 480px) {
+            .reels-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .reels-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 25px;
+            }
+        }
+
+        .reel-card {
+            background: #3a2a15;
+            border: 1px solid rgba(255, 120, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .reel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 120, 0, 0.2);
+            border-color: #ff7800;
+        }
+
+        .reel-video-container {
+            position: relative;
+            width: 100%;
+            background: #000;
+            cursor: pointer;
+        }
+
+        .reel-video {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 120, 0, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            transition: all 0.3s;
+            pointer-events: none;
+        }
+
+        .reel-video-container.playing .play-overlay {
+            display: none;
+        }
+
+        .reel-details {
+            padding: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .reel-details {
+                padding: 20px;
+            }
+        }
+
+        .reel-details h3 {
+            color: #e8cfa0;
+            margin-bottom: 8px;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            word-break: break-word;
+        }
+
+        .reel-details p {
+            color: #b8956a;
+            margin-bottom: 6px;
+            font-size: clamp(0.8rem, 2vw, 0.95rem);
+            word-break: break-word;
+        }
+
+        .reel-details .description {
+            background: rgba(255, 120, 0, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-style: italic;
+            color: #b8956a;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            word-break: break-word;
+            border-left: 3px solid #ff7800;
+        }
+
+        .vote-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 120, 0, 0.2);
+        }
+
+        .vote-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 16px;
+            border: 2px solid rgba(255, 120, 0, 0.3);
+            border-radius: 25px;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            font-weight: 600;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            color: #b8956a;
+        }
+
+        .vote-btn:hover {
+            transform: scale(1.05);
+            border-color: #ff7800;
+            color: #ff7800;
+        }
+
+        .vote-btn:active {
+            transform: scale(0.95);
+        }
+
+        .vote-btn.active-like {
+            background: linear-gradient(135deg, #ff7800, #ff6000);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 0 15px rgba(255, 120, 0, 0.3);
+        }
+
+        .vote-count {
+            font-weight: 700;
+            margin-left: 3px;
+        }
+
+        .vote-icon {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+        }
+
+        .reel-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .reel-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .reel-modal video {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(255, 120, 0, 0.3);
+            object-fit: contain;
+        }
+
+        .reel-modal-info {
+            color: #e8cfa0;
+            text-align: center;
+            margin-top: 20px;
+            font-size: clamp(0.85rem, 2vw, 1.1rem);
+            padding: 0 15px;
+        }
+
+        .close-reel-btn {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            color: #ff7800;
+            font-size: 2.5rem;
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 120, 0, 0.1);
+            border-radius: 50%;
+            border: 1px solid rgba(255, 120, 0, 0.3);
+        }
+
+        @media (min-width: 768px) {
+            .close-reel-btn {
+                top: 20px;
+                right: 30px;
+                font-size: 3rem;
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        .close-reel-btn:hover {
+            transform: scale(1.2);
+            background: rgba(255, 120, 0, 0.2);
+            box-shadow: 0 0 15px rgba(255, 120, 0, 0.3);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px 20px;
+            color: #b8956a;
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            grid-column: 1 / -1;
+        }
+
+        .error {
+            background: rgba(255, 87, 87, 0.1);
+            color: #ff5757;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ff5757;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+        }
+
+        .success {
+            background: rgba(255, 120, 0, 0.1);
+            color: #ff7800;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ff7800;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+        }
+
+        .rules-box {
+            background: rgba(255, 120, 0, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 120, 0, 0.2);
+        }
+
+        @media (min-width: 768px) {
+            .rules-box {
+                padding: 20px;
+                margin-bottom: 25px;
+            }
+        }
+
+        .rules-box h3 {
+            color: #ff7800;
+            margin-bottom: 12px;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+        }
+
+        .rules-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .rules-box li {
+            padding: 6px 0;
+            color: #b8956a;
+            font-size: clamp(0.8rem, 2vw, 0.95rem);
+            line-height: 1.4;
+        }
+
+        .rules-box li:before {
+            content: "🎬 ";
+        }
+
+        .counter {
+            text-align: center;
+            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+            color: #ff7800;
+            margin: 15px 0;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(255, 120, 0, 0.3);
+        }
+
+        .page-title {
+            color: #ff7800;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 120, 0, 0.3);
+        }
+
+        .footer {
+            background: #1a0a05;
+            color: #b8956a;
+            text-align: center;
+            padding: 15px;
+            font-size: clamp(0.75rem, 2vw, 0.9rem);
+            border-top: 1px solid rgba(255, 120, 0, 0.2);
+        }
+
+        .footer span {
+            color: #ff7800;
+            font-weight: 600;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .vote-animation {
+            animation: pop 0.3s ease;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+
+            .container {
+                border-radius: 12px;
+            }
+
+            .header h1 {
+                font-size: 1.3rem;
+            }
+
+            .content {
+                padding: 15px 12px;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            input[type="text"],
+            input[type="tel"],
+            textarea {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+
+            .file-upload {
+                padding: 15px;
+            }
+
+            .btn {
+                padding: 12px 30px;
+            }
+
+            .reel-details {
+                padding: 12px;
+            }
+
+            .vote-btn {
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 WBSU Reels 2026</h1>
+            <p>Organized by ABVP</p>
+            <p>Capture Moments, Create Stories</p>
+        </div>
+
+        <div class="competition-info">
+           Theme: "Campus Life & Beyond"<br>
+             Deadline: August 14, 2026
+        </div>
+   
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="switchTab('submit')">🎬 Upload Reel</button>
+            <button class="nav-tab" onclick="switchTab('view')">📱 Watch Reels</button>
+        </div>
+
+        <div class="content">
+            <div id="submit-page" class="page active">
+                <h2 class="page-title">Submit Your Reel</h2>
+                
+                <div class="rules-box">
+                    <h3>Competition Rules</h3>
+                    <ul>
+                        <li>Reel must be shot inside WBSU campus or related to campus life</li>
+                        <li>Maximum duration: 60 seconds</li>
+                        <li>Video must be original and unpublished</li>
+                        <li>Accepted formats: MP4, MOV, AVI, WebM, MKV</li>
+                        <li>Multiple reels allowed per participant</li>
+                        <li>Include a creative description of your reel</li>
+                    </ul>
+                </div>
+                
+                <div id="message-box"></div>
+                
+                <form id="reel-form" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="name">Participant Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mobile">Contact Number *</label>
+                        <input type="tel" id="mobile" name="mobile" required pattern="[0-9]{10}" 
+                               placeholder="10-digit mobile number" maxlength="10">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="department">Department *</label>
+                        <input type="text" id="department" name="department" required 
+                               placeholder="Enter your department">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="semester">Semester *</label>
+                        <input type="text" id="semester" name="semester" required 
+                               placeholder="Enter your semester">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reel_description">Reel Description / Story *</label>
+                        <textarea id="reel_description" name="reel_description" 
+                                  placeholder="Tell us about your reel..." 
+                                  rows="4"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Upload Your Reel *</label>
+                        <div class="file-upload" onclick="document.getElementById('reel').click()">
+                            <p style="font-size: 2rem;">🎬</p>
+                            <p style="font-weight: 600; color: #ff7800;">Select Your Reel Video</p>
+                            <p style="font-size: 0.85rem;">MP4, MOV, AVI, WebM, MKV (Max 100MB)</p>
+                            <input type="file" id="reel" name="reel" accept="video/*" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn pulse">Submit Reel</button>
+                </form>
+            </div>
+
+            <div id="view-page" class="page">
+                <h2 class="page-title">📱 Reels Gallery</h2>
+                <p style="margin-bottom: 20px; color: #b8956a; font-size: clamp(0.85rem, 2vw, 1rem);">Click on any reel to watch it</p>
+                <div class="counter" id="entry-counter"></div>
+                <div id="reels-container" class="reels-grid">
+                    <div class="loading">Loading reels...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            This site developed by <span>Coding Hub - Duttapukur</span>
+        </div>
+    </div>
+
+    <div id="reel-modal" class="reel-modal">
+        <span class="close-reel-btn" onclick="closeReelModal()">&times;</span>
+        <video id="modal-reel-video" controls autoplay></video>
+        <div class="reel-modal-info" id="modal-reel-info"></div>
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            
+            if (tab === 'submit') {
+                document.querySelectorAll('.nav-tab')[0].classList.add('active');
+                document.getElementById('submit-page').classList.add('active');
+            } else {
+                document.querySelectorAll('.nav-tab')[1].classList.add('active');
+                document.getElementById('view-page').classList.add('active');
+                loadReels();
+            }
+        }
+
+        document.getElementById('reel-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const messageBox = document.getElementById('message-box');
+            const submitBtn = this.querySelector('.btn');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Uploading Reel...';
+            
+            try {
+                const response = await fetch('/api/reels', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    messageBox.innerHTML = '<div class="success">✅ Your reel has been submitted successfully!</div>';
+                    this.reset();
+                    submitBtn.textContent = 'Submit Another Reel';
+                    submitBtn.classList.remove('pulse');
+                    
+                    setTimeout(() => {
+                        switchTab('view');
+                        submitBtn.textContent = 'Submit Reel';
+                        submitBtn.classList.add('pulse');
+                    }, 2000);
+                } else {
+                    messageBox.innerHTML = `<div class="error">❌ ${data.error}</div>`;
+                }
+            } catch (error) {
+                messageBox.innerHTML = '<div class="error">❌ Network error. Please try again.</div>';
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+
+        async function vote(entryId, voteType) {
+            try {
+                const response = await fetch(`/api/vote/reel/${entryId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ vote_type: voteType })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    await loadReels();
+                    
+                    setTimeout(() => {
+                        const card = document.querySelector(`[data-entry-id="${entryId}"]`);
+                        if (card) {
+                            const voteBtn = card.querySelector(`.${voteType}-btn`);
+                            if (voteBtn && data.user_vote === voteType) {
+                                voteBtn.classList.add('vote-animation');
+                                setTimeout(() => voteBtn.classList.remove('vote-animation'), 300);
+                            }
+                        }
+                    }, 100);
+                } else {
+                    alert(data.error || 'Failed to vote');
+                }
+            } catch (error) {
+                alert('Network error. Please try again.');
+            }
+        }
+
+        function openReelModal(url, name, department, description, semester) {
+            const modal = document.getElementById('reel-modal');
+            const modalVideo = document.getElementById('modal-reel-video');
+            const modalInfo = document.getElementById('modal-reel-info');
+            
+            document.querySelectorAll('.reel-video-container video').forEach(v => v.pause());
+            document.querySelectorAll('.reel-video-container').forEach(c => c.classList.remove('playing'));
+            
+            modal.classList.add('active');
+            modalVideo.src = url;
+            modalVideo.load();
+            modalVideo.play();
+            
+            modalInfo.innerHTML = `
+                <p><strong>Creator:</strong> ${name}</p>
+                <p><strong>Department:</strong> ${department}</p>
+                <p><strong>Semester:</strong> ${semester}</p>
+                ${description ? `<p><em>"${description}"</em></p>` : ''}
+                <p style="font-size: 0.9rem; opacity: 0.8;">Press ESC or X to close</p>
+            `;
+        }
+
+        function closeReelModal() {
+            const modal = document.getElementById('reel-modal');
+            const modalVideo = document.getElementById('modal-reel-video');
+            
+            modalVideo.pause();
+            modalVideo.src = '';
+            modal.classList.remove('active');
+        }
+
+        async function loadReels() {
+            const container = document.getElementById('reels-container');
+            
+            try {
+                const response = await fetch('/api/reels');
+                const entries = await response.json();
+                
+                document.getElementById('entry-counter').innerHTML = 
+                    `🎬 Total Reels: <strong>${entries.length}</strong>`;
+                
+                if (entries.length === 0) {
+                    container.innerHTML = `
+                        <div class="loading">
+                            <p style="font-size: 3rem;">🎬</p>
+                            <p>No reels yet! Be the first to upload your reel.</p>
+                        </div>`;
+                    return;
+                }
+                
+                const voteStatusPromises = entries.map(entry => 
+                    fetch(`/api/vote/reel/${entry.id}/status`).then(res => res.json())
+                );
+                const voteStatuses = await Promise.all(voteStatusPromises);
+                
+                container.innerHTML = entries.map((entry, index) => {
+                    const voteStatus = voteStatuses[index];
+                    const userVote = voteStatus.user_vote;
+                    
+                    return `
+                    <div class="reel-card" data-entry-id="${entry.id}">
+                        <div class="reel-video-container" onclick="openReelModal('${entry.reel_url}', '${escapeHtml(entry.name)}', '${escapeHtml(entry.department)}', '${escapeHtml(entry.reel_description || '')}', '${escapeHtml(entry.semester)}')">
+                            <video class="reel-video" src="${entry.reel_url}" preload="metadata" muted loop playsinline></video>
+                            <div class="play-overlay">▶</div>
+                        </div>
+                        <div class="reel-details">
+                            <h3>🎬 ${escapeHtml(entry.name)}</h3>
+                            <p>📚 Department: ${escapeHtml(entry.department)}</p>
+                            <p>🎓 Semester: ${escapeHtml(entry.semester)}</p>
+                            ${entry.reel_description ? 
+                                `<div class="description">💬 ${escapeHtml(entry.reel_description)}</div>` : 
+                                ''}
+                            
+                            <div class="vote-section">
+                                <button class="vote-btn like-btn ${userVote === 'like' ? 'active-like' : ''}" 
+                                        onclick="event.stopPropagation(); vote(${entry.id}, 'like')">
+                                    <span class="vote-icon">👍</span>
+                                    <span>Like</span>
+                                    <span class="vote-count">${entry.likes}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `}).join('');
+                
+            } catch (error) {
+                container.innerHTML = '<div class="error">Failed to load reels. Please try again later.</div>';
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeReelModal();
+        });
+
+        document.getElementById('reel-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeReelModal();
+        });
+
+        const fileUpload = document.querySelector('.file-upload');
+        fileUpload.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.style.background = 'rgba(255, 120, 0, 0.15)';
+        });
+
+        fileUpload.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.style.background = 'rgba(255, 120, 0, 0.05)';
+        });
+
+        fileUpload.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.style.background = 'rgba(255, 120, 0, 0.05)';
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                document.getElementById('reel').files = files;
+                document.getElementById('reel').dispatchEvent(new Event('change'));
+            }
+        });
+    </script>
+</body>
+</html>
