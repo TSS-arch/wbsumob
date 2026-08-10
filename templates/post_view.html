@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    {% if post_type == 'reel' %}
+    <title>{{ entry.name }} - WBSU Reels 2026</title>
+    <meta property="og:title" content="{{ entry.name }} - WBSU Reels 2026">
+    <meta property="og:description" content="🎬 {{ entry.reel_description }}">
+    <meta property="og:image" content="{{ entry.thumbnail_url }}">
+    <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+    <meta property="og:video" content="{{ entry.reel_url }}"><meta property="og:video:type" content="video/mp4">
+    {% else %}
+    <title>{{ entry.name }} - WBSU Mobography 2026</title>
+    <meta property="og:title" content="{{ entry.name }} - WBSU Mobography 2026">
+    <meta property="og:description" content="📸 {{ entry.photo_description }}">
+    <meta property="og:image" content="{{ entry.thumbnail_url }}">
+    <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+    {% endif %}
+    <meta property="og:url" content="{{ request.url }}"><meta property="og:type" content="website"><meta property="og:site_name" content="WBSU Mobography 2026">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0a0a0a; min-height: 100vh; color: #e8cfa0; }
+        .post-container { max-width: 800px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; }
+        .post-header { background: linear-gradient(135deg, #1a0a0a 0%, #2a1a0a 50%, #1a0a0a 100%); padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid rgba(255, 140, 0, 0.3); }
+        .back-btn { background: rgba(255, 140, 0, 0.1); border: 1px solid rgba(255, 140, 0, 0.3); color: #ff8c00; padding: 8px 16px; border-radius: 25px; cursor: pointer; font-size: 0.9rem; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 5px; }
+        .back-btn:hover { background: rgba(255, 140, 0, 0.2); }
+        .post-title { font-size: clamp(1rem, 2.5vw, 1.3rem); color: #ff8c00; font-weight: 600; }
+        .post-content { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; background: #111; }
+        .media-container { max-width: 100%; max-height: 70vh; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 40px rgba(255, 140, 0, 0.3); border: 2px solid rgba(255, 140, 0, 0.2); }
+        .media-container img { width: 100%; height: auto; max-height: 70vh; object-fit: contain; display: block; }
+        .media-container video { width: 100%; max-height: 70vh; display: block; border-radius: 12px; }
+        .post-info { padding: 20px; background: linear-gradient(135deg, #1a0a0a, #2a1a0a); }
+        .author-name { font-size: clamp(1.2rem, 3vw, 1.5rem); color: #ff8c00; margin-bottom: 10px; }
+        .author-details { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; color: #b8956a; font-size: clamp(0.85rem, 2vw, 0.95rem); }
+        .description-box { background: rgba(255, 140, 0, 0.05); padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 3px solid #ff8c00; color: #b8956a; font-style: italic; line-height: 1.6; }
+        .action-buttons { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; }
+        .share-btn { background: #1877f2; color: white; padding: 12px 24px; border: none; border-radius: 25px; font-size: clamp(0.9rem, 2vw, 1rem); font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+        .share-btn:hover { background: #166fe5; transform: translateY(-2px); box-shadow: 0 5px 20px rgba(24, 119, 242, 0.4); }
+        .share-btn.whatsapp { background: #25D366; }
+        .share-btn.whatsapp:hover { background: #20bd5a; }
+        .copy-link-btn { background: rgba(255, 140, 0, 0.1); border: 2px solid rgba(255, 140, 0, 0.3); color: #ff8c00; padding: 12px 24px; border-radius: 25px; font-size: clamp(0.9rem, 2vw, 1rem); font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .copy-link-btn:hover { background: rgba(255, 140, 0, 0.2); }
+        .view-more-section { text-align: center; padding: 20px; background: #1a0a0a; border-top: 2px solid rgba(255, 140, 0, 0.2); }
+        .view-more-section p { color: #b8956a; margin-bottom: 15px; font-size: 0.9rem; }
+        .view-more-buttons { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+        .view-more-btn { background: linear-gradient(135deg, #ff8c00, #ff6b00); color: white; padding: 12px 24px; border: none; border-radius: 50px; font-size: 0.95rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 6px; }
+        .view-more-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255, 107, 0, 0.4); }
+        .vote-section { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .vote-btn { display: flex; align-items: center; gap: 5px; padding: 10px 20px; border: 2px solid rgba(255, 140, 0, 0.3); border-radius: 25px; background: transparent; cursor: pointer; transition: all 0.3s; font-size: clamp(0.9rem, 2vw, 1rem); font-weight: 600; color: #b8956a; }
+        .vote-btn:hover { border-color: #ff8c00; color: #ff8c00; }
+        .vote-btn.active-like { background: linear-gradient(135deg, #ff8c00, #ff6b00); color: white; border-color: transparent; box-shadow: 0 0 15px rgba(255, 140, 0, 0.3); }
+        .vote-count { font-weight: 700; }
+        .copied-message { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #ff8c00; color: white; padding: 12px 24px; border-radius: 25px; font-weight: 600; z-index: 1000; animation: slideDown 0.3s ease; }
+        @keyframes slideDown { from { transform: translate(-50%, -100%); } to { transform: translate(-50%, 0); } }
+        @media (max-width: 480px) { .action-buttons { flex-direction: column; } .share-btn, .copy-link-btn { width: 100%; justify-content: center; } .post-content { padding: 10px; } .view-more-buttons { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <div class="post-container">
+       
+        <div class="post-content">
+            <div class="media-container">
+                {% if post_type == 'reel' %}
+                <video controls autoplay loop playsinline><source src="{{ entry.reel_url }}" type="video/mp4"></video>
+                {% else %}
+                <img src="{{ entry.photo_url }}" alt="Entry by {{ entry.name }}">
+                {% endif %}
+            </div>
+        </div>
+        <div class="post-info">
+            <h2 class="author-name">{% if post_type == 'image' %}📸{% elif post_type == 'ai_image' %}🤖{% elif post_type == 'reel' %}🎬{% endif %} {{ entry.name }}</h2>
+            <div class="author-details"><span>📚 {{ entry.department }}</span><span>🎓 Semester {{ entry.semester }}</span></div>
+            {% if post_type == 'reel' and entry.reel_description %}<div class="description-box">💬 {{ entry.reel_description }}</div>{% elif entry.photo_description %}<div class="description-box">💬 {{ entry.photo_description }}</div>{% endif %}
+            <div class="vote-section">
+                <button class="vote-btn like-btn" id="like-btn" onclick="toggleVote()"><span>👍</span><span>Like</span><span class="vote-count" id="like-count">{{ entry.likes }}</span></button>
+            </div>
+            <div class="action-buttons">
+                <button class="share-btn" onclick="shareOnFacebook()">📱 Share on Facebook</button>
+                
+                <button class="copy-link-btn" onclick="copyLink()">🔗 Copy Link</button>
+            </div>
+        </div>
+        <div class="view-more-section">
+            <p>👇 View more amazing entries from all competitions!</p>
+            <div class="view-more-buttons">
+                <a href="/mobography?view=only" class="view-more-btn">📸 View All Photos</a>
+                <a href="/ai-image?view=only" class="view-more-btn">🤖 View All AI Art</a>
+                <a href="/reels?view=only" class="view-more-btn">🎬 Watch All Reels</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        const postType = '{{ post_type }}'; const entryId = '{{ entry.id }}';
+        async function toggleVote() {
+            let apiUrl;
+            if(postType==='image') apiUrl=`/api/vote/image/${entryId}`;
+            else if(postType==='ai_image') apiUrl=`/api/vote/ai-image/${entryId}`;
+            else apiUrl=`/api/vote/reel/${entryId}`;
+            try {
+                const r=await fetch(apiUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({vote_type:'like'})});
+                const d=await r.json();
+                if(r.ok){document.getElementById('like-count').textContent=d.entry.likes;const b=document.getElementById('like-btn');b.classList.toggle('active-like',d.user_vote==='like');}
+            }catch(e){}
+        }
+        async function checkVote(){
+            let apiUrl;
+            if(postType==='image') apiUrl=`/api/vote/image/${entryId}/status`;
+            else if(postType==='ai_image') apiUrl=`/api/vote/ai-image/${entryId}/status`;
+            else apiUrl=`/api/vote/reel/${entryId}/status`;
+            try{const r=await fetch(apiUrl);const d=await r.json();if(d.user_vote==='like')document.getElementById('like-btn').classList.add('active-like');}catch(e){}
+        }
+        function shareOnFacebook(){window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`,'_blank','width=600,height=400');}
+        function shareOnWhatsApp(){window.open(`https://wa.me/?text=${encodeURIComponent('📸 Check out this amazing entry at WBSU Mobography 2026!\n\n'+window.location.href)}`,'_blank');}
+        function copyLink(){navigator.clipboard.writeText(window.location.href).then(()=>{const m=document.createElement('div');m.className='copied-message';m.textContent='✅ Link copied!';document.body.appendChild(m);setTimeout(()=>m.remove(),2000);});}
+        checkVote();
+    </script>
+</body>
+</html>
