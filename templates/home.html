@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>WBSU - Home</title>
-    <meta property="og:title" content="WBSU Mobography 2026">
+    <meta property="og:title" content="WBSU Digital Creativity Competition 2026">
     <meta property="og:description" content="Capture the Moment, Share Your Vision - Organized by ABVP">
     <meta property="og:type" content="website">
     <style>
@@ -15,65 +15,70 @@
             min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;
         }
         .home-container { max-width: 800px; width: 100%; text-align: center; }
+        .indian-flag-strip { height: 4px; background: linear-gradient(90deg, #ff9933 33.33%, #ffffff 33.33%, #ffffff 66.66%, #138808 66.66%); border-radius: 2px; margin-bottom: 20px; }
         .logo-section { margin-bottom: 40px; }
         .logo-icon { font-size: clamp(3rem, 8vw, 5rem); display: block; margin-bottom: 15px; animation: float 3s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
-        .main-title { font-size: clamp(2rem, 6vw, 3.5rem); color: #ff8c00; margin-bottom: 10px; text-shadow: 0 0 30px rgba(255, 140, 0, 0.5); line-height: 1.2; }
-        .subtitle { font-size: clamp(1rem, 3vw, 1.5rem); color: #e8cfa0; margin-bottom: 5px; }
+        .main-title { font-size: clamp(1rem, 4vw, 2.8rem); background: linear-gradient(135deg, #ff9933, #ff8c00, #138808); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px; line-height: 1.2; white-space: nowrap; font-weight: 800; }
+        @media (max-width: 480px) { .main-title { font-size: 1rem; white-space: nowrap; } }
         .organizer { font-size: clamp(0.9rem, 2.5vw, 1.2rem); color: #b8956a; margin-bottom: 30px; }
         .competition-cards { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 40px; }
         @media (min-width: 768px) { .competition-cards { grid-template-columns: repeat(3, 1fr); gap: 25px; } }
-        .comp-card { background: rgba(42, 26, 10, 0.9); border: 2px solid rgba(255, 140, 0, 0.3); border-radius: 20px; padding: 30px 20px; cursor: pointer; transition: all 0.3s; text-decoration: none; display: block; position: relative; overflow: hidden; }
-        .comp-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(255, 140, 0, 0.3); border-color: #ff8c00; }
-        .comp-card:nth-child(2) { border-color: rgba(255, 165, 0, 0.3); }
-        .comp-card:nth-child(2):hover { border-color: #ffa500; box-shadow: 0 15px 40px rgba(255, 165, 0, 0.3); }
-        .comp-card:nth-child(3) { border-color: rgba(255, 120, 0, 0.3); }
-        .comp-card:nth-child(3):hover { border-color: #ff7800; box-shadow: 0 15px 40px rgba(255, 120, 0, 0.3); }
+        .comp-card { background: rgba(42, 26, 10, 0.9); border: 2px solid rgba(255, 153, 51, 0.3); border-radius: 20px; padding: 30px 20px; cursor: pointer; transition: all 0.3s; text-decoration: none; display: block; position: relative; overflow: hidden; }
+        .comp-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(255, 153, 51, 0.3); border-color: #ff9933; }
+        .comp-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #ff9933, #ffffff, #138808); }
         .card-icon { font-size: clamp(2.5rem, 6vw, 3.5rem); display: block; margin-bottom: 15px; }
-        .card-title { font-size: clamp(1.2rem, 3vw, 1.5rem); color: #ff8c00; margin-bottom: 10px; font-weight: 700; }
-        .comp-card:nth-child(2) .card-title { color: #ffa500; }
-        .comp-card:nth-child(3) .card-title { color: #ff7800; }
-        .card-desc { color: #b8956a; font-size: clamp(0.85rem, 2vw, 1rem); line-height: 1.4; }
-        .deadline-banner { background: linear-gradient(135deg, rgba(255, 140, 0, 0.1), rgba(255, 100, 0, 0.1)); border: 1px solid rgba(255, 140, 0, 0.3); border-radius: 15px; padding: 20px; margin-bottom: 30px; }
-        .deadline-banner h3 { color: #ff8c00; font-size: clamp(1rem, 2.5vw, 1.3rem); margin-bottom: 5px; }
+        .card-title { font-size: clamp(1.2rem, 3vw, 1.5rem); background: linear-gradient(135deg, #ff9933, #138808); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px; font-weight: 700; }
+        .card-desc { color: #e8cfa0; font-size: clamp(0.85rem, 2vw, 1rem); line-height: 1.4; font-weight: 600; }
+        .card-theme { color: #b8956a; font-size: clamp(0.8rem, 2vw, 0.9rem); margin-top: 8px; }
+        .deadline-banner { background: linear-gradient(135deg, rgba(255, 153, 51, 0.1), rgba(19, 136, 8, 0.1)); border: 1px solid rgba(255, 153, 51, 0.3); border-radius: 15px; padding: 20px; margin-bottom: 30px; }
+        .deadline-banner h3 { color: #ff9933; font-size: clamp(1rem, 2.5vw, 1.3rem); margin-bottom: 5px; }
         .deadline-banner p { color: #e8cfa0; font-size: clamp(0.9rem, 2vw, 1.1rem); }
         .footer-info { color: #6b5040; font-size: clamp(0.8rem, 2vw, 0.9rem); line-height: 1.6; }
-        .footer-info span { color: #ff8c00; font-weight: 600; }
+        .footer-info span { background: linear-gradient(135deg, #ff9933, #138808); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 600; }
     </style>
 </head>
 <body>
     <div class="home-container">
+        <div class="indian-flag-strip"></div>
+        
         <div class="logo-section">
             <span class="logo-icon">📸</span>
-            <h1 class="main-title">WBSU DIGITAL CREATIVITY COMPETITION 2026</h1>
-            
+            <h1 class="main-title">WBSU Digital Creativity Competition 2026</h1>
             <p class="organizer">Organized by <strong>ABVP</strong></p>
         </div>
+        
         <div class="deadline-banner">
-            <h3>📅 Competition Deadline</h3>
-            <p>August 14, 2026 – Present Your Motion & Still Art</p>
+            <h3>📅 Deadline: August 14, 2026</h3>
+            <p>– Present Your Motion & Still Art –</p>
         </div>
+        
         <div class="competition-cards">
             <a href="/mobography" class="comp-card">
                 <span class="card-icon">📸</span>
                 <h3 class="card-title">Mobile Photography</h3>
-                <p class="card-desc">Capture stunning moments within WBSU campus using your mobile phone</p>
+                <p class="card-desc">"Campus Through My Eyes"</p>
+                <p class="card-theme">নিজের চোখে WBSU ক্যাম্পাসের সৌন্দর্য</p>
             </a>
             <a href="/ai-image" class="comp-card">
                 <span class="card-icon">🤖</span>
-                <h3 class="card-title">AI Generated Art</h3>
-                <p class="card-desc">Create amazing AI-generated posters and artwork for the competition</p>
+                <h3 class="card-title">AI Poster Making</h3>
+                <p class="card-desc">"Imagine India on 15th August 1947"</p>
+                <p class="card-theme">স্বাধীনতার ঐতিহাসিক মুহূর্ত AI-এর মাধ্যমে</p>
             </a>
             <a href="/reels" class="comp-card">
                 <span class="card-icon">🎬</span>
-                <h3 class="card-title">Reels Competition</h3>
-                <p class="card-desc">Show your creativity with short video reels about campus life</p>
+                <h3 class="card-title">30-Second Reel Making</h3>
+                <p class="card-desc">"Nationalism"</p>
+                <p class="card-theme">দেশপ্রেম, জাতীয় ঐক্য, নাগরিক দায়িত্ব</p>
             </a>
         </div>
+        
         <div class="footer-info">
             <p>This site developed by <span>Coding Hub - Duttapukur</span></p>
-          
         </div>
+        
+        <div class="indian-flag-strip"></div>
     </div>
 </body>
 </html>
