@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>WBSU Mobography 2026</title>
     <meta property="og:title" content="WBSU Mobography 2026">
-    <meta property="og:description" content="Capture the Moment, Share Your Vision - Mobile Photography Competition">
+    <meta property="og:description" content="Campus Through My Eyes - Mobile Photography Competition">
     <meta property="og:type" content="website">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,6 +19,8 @@
         .home-link { position: absolute; top: 15px; left: 15px; z-index: 2; color: #ff8c00; text-decoration: none; font-size: 0.9rem; background: rgba(255, 140, 0, 0.1); padding: 5px 12px; border-radius: 20px; border: 1px solid rgba(255, 140, 0, 0.3); transition: all 0.3s; }
         .home-link:hover { background: rgba(255, 140, 0, 0.2); }
         .competition-info { background: linear-gradient(135deg, #2a1a0a 0%, #3a2a1a 100%); color: #ff8c00; padding: 12px 15px; text-align: center; font-weight: 500; font-size: clamp(0.75rem, 2.5vw, 1rem); line-height: 1.4; border-top: 1px solid rgba(255, 140, 0, 0.2); border-bottom: 1px solid rgba(255, 140, 0, 0.2); text-shadow: 0 0 10px rgba(255, 140, 0, 0.3); }
+        .theme-description { background: rgba(255, 140, 0, 0.08); padding: 15px; margin: 0 15px 20px 15px; border-radius: 10px; border: 1px solid rgba(255, 140, 0, 0.15); color: #e8cfa0; font-size: clamp(0.85rem, 2vw, 0.95rem); line-height: 1.6; }
+        .theme-description strong { color: #ff8c00; }
         .nav-tabs { display: flex; background: #3a2a1a; border-bottom: 2px solid rgba(255, 140, 0, 0.3); }
         .nav-tab { flex: 1; padding: 12px 10px; text-align: center; cursor: pointer; font-weight: 600; color: #b8956a; transition: all 0.3s; border: none; background: none; font-size: clamp(0.85rem, 2.5vw, 1.1rem); position: relative; }
         .nav-tab.active { color: #ff8c00; background: #2a1a0a; text-shadow: 0 0 10px rgba(255, 140, 0, 0.5); }
@@ -92,39 +94,57 @@
         .vote-animation { animation: pop 0.3s ease; }
         .toast-message { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #ff8c00; color: white; padding: 10px 20px; border-radius: 25px; font-weight: 600; z-index: 1000; animation: slideDown 0.3s ease; }
         @keyframes slideDown { from { transform: translate(-50%, -100%); } to { transform: translate(-50%, 0); } }
-        @media (max-width: 480px) { body { padding: 5px; } .container { border-radius: 12px; } .header h1 { font-size: 1.3rem; } .content { padding: 15px 12px; } .form-group { margin-bottom: 15px; } input[type="text"], input[type="tel"], textarea { padding: 10px; font-size: 0.9rem; } .file-upload { padding: 15px; } .btn { padding: 12px 30px; } .photo-details { padding: 12px; } .vote-btn { padding: 6px 12px; } }
+        @media (max-width: 480px) { body { padding: 5px; } .container { border-radius: 12px; } .header h1 { font-size: 1.3rem; } .content { padding: 15px 12px; } .form-group { margin-bottom: 15px; } input[type="text"], input[type="tel"], textarea { padding: 10px; font-size: 0.9rem; } .file-upload { padding: 15px; } .btn { padding: 12px 30px; } .photo-details { padding: 12px; } .vote-btn { padding: 6px 12px; } .theme-description { margin: 0 10px 15px 10px; padding: 12px; } }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <a href="/" class="home-link">🏠 Home</a>
-            <h1>WBSU Mobography 2026</h1>
+            <h1>📸 WBSU Mobography 2026</h1>
             <p>Organized by ABVP</p>
             <p>Capture the Moment, Share Your Vision</p>
         </div>
-        <div class="competition-info">Theme: "Freedom of Vision"<br>Deadline: August 14, 2026</div>
+        <div class="competition-info">
+            Theme: <strong>"Campus Through My Eyes"</strong><br>
+            Deadline: August 14, 2026
+        </div>
+        <div class="theme-description">
+            <strong>📸 Theme Description:</strong> <em>"নিজের চোখে WBSU বিশ্ববিদ্যালয় ক্যাম্পাসের সৌন্দর্য, প্রাণবন্ত জীবন, পরিবেশ, সংস্কৃতি কিংবা কোনো বিশেষ মুহূর্ত Mobile Photography-র মাধ্যমে সৃজনশীলভাবে তুলে ধরতে হবে।"</em><br><br>
+            <strong>English:</strong> Creatively showcase the beauty, vibrant life, environment, culture, or any special moment of the WBSU university campus through your eyes using Mobile Photography.
+        </div>
         <div class="nav-tabs">
             <button class="nav-tab active" id="upload-tab" onclick="switchTab('submit')">📝 Upload Photo</button>
             <button class="nav-tab" id="view-tab" onclick="switchTab('view')">🖼️ View Gallery</button>
         </div>
         <div class="content">
             <div id="submit-page" class="page active">
-                <h2 class="page-title">Submit Your Photo Entry</h2>
-                <div class="rules-box"><h3>Competition Rules</h3><ul><li>Photo must be taken inside the WBSU campus</li><li>Photo must be taken by mobile only</li><li>Photo must be original and unpublished</li><li>Accepted formats: JPG, PNG, GIF, WebP</li><li>Multiple photos allowed by individual participant</li><li>Include a creative description of your photo</li></ul></div>
+                <h2 class="page-title">Submit Your Mobile Photo Entry</h2>
+                <div class="rules-box">
+                    <h3>📋 Competition Rules</h3>
+                    <ul>
+                        <li>Photo must be taken inside the WBSU campus</li>
+                        <li>Photo must be taken by <strong>mobile phone only</strong></li>
+                        <li>Photo must be original and unpublished</li>
+                        <li>Accepted formats: JPG, PNG, GIF, WebP</li>
+                        <li>Multiple photos allowed per participant</li>
+                        <li>Include a creative description of your photo</li>
+                        <li>Focus on campus beauty, life, environment, culture & special moments</li>
+                    </ul>
+                </div>
                 <div id="message-box"></div>
                 <form id="student-form" enctype="multipart/form-data">
                     <div class="form-group"><label for="name">Participant Name *</label><input type="text" id="name" name="name" required placeholder="Enter your full name"></div>
                     <div class="form-group"><label for="mobile">Contact Number *</label><input type="tel" id="mobile" name="mobile" required pattern="[0-9]{10}" placeholder="10-digit mobile number" maxlength="10"></div>
                     <div class="form-group"><label for="department">Department *</label><input type="text" id="department" name="department" required placeholder="Enter your department"></div>
                     <div class="form-group"><label for="semester">Semester *</label><input type="text" id="semester" name="semester" required placeholder="Enter your semester"></div>
-                    <div class="form-group"><label for="photo_description">Photo Story / Description *</label><textarea id="photo_description" name="photo_description" placeholder="Tell us the story behind your photo..." rows="4"></textarea></div>
-                    <div class="form-group"><label>Upload Your Photo *</label><div class="file-upload" onclick="document.getElementById('photo').click()"><p style="font-size: 2rem;">📸</p><p style="font-weight: 600; color: #ff8c00;">Select to Upload Your Photo</p><input type="file" id="photo" name="photo" accept="image/*" required></div></div>
-                    <button type="submit" class="btn pulse">Submit</button>
+                    <div class="form-group"><label for="photo_description">Photo Story / Description *</label><textarea id="photo_description" name="photo_description" placeholder="Tell us the story behind your campus photo... What does this moment mean to you?" rows="4"></textarea></div>
+                    <div class="form-group"><label>Upload Your Mobile Photo *</label><div class="file-upload" onclick="document.getElementById('photo').click()"><p style="font-size: 2rem;">📸</p><p style="font-weight: 600; color: #ff8c00;">Select Your Campus Photo</p><p style="font-size: 0.85rem;">Taken with your mobile phone</p><input type="file" id="photo" name="photo" accept="image/*" required></div></div>
+                    <button type="submit" class="btn pulse">Submit Entry</button>
                 </form>
             </div>
             <div id="view-page" class="page">
-                <h2 class="page-title">📸 Photo Gallery</h2>
+                <h2 class="page-title">📸 Campus Photo Gallery</h2>
                 <p style="margin-bottom: 20px; color: #b8956a; font-size: clamp(0.85rem, 2vw, 1rem);">Click on any photo to view it in full resolution</p>
                 <div class="counter" id="entry-counter"></div>
                 <div id="students-container" class="photos-grid"><div class="loading">Loading gallery entries...</div></div>
@@ -134,7 +154,6 @@
     </div>
     <div id="image-modal" class="modal"><span class="close-btn" onclick="closeModal()">&times;</span><img id="modal-image" src="" alt="Zoomed photo" onclick="toggleZoom()"><div class="modal-info" id="modal-info"></div></div>
     <script>
-        // Check URL parameter for view-only mode
         const urlParams = new URLSearchParams(window.location.search);
         const viewOnly = urlParams.get('view') === 'only';
         
@@ -172,7 +191,7 @@
                 const response = await fetch('/api/images', { method: 'POST', body: formData }); const data = await response.json();
                 if (response.ok) {
                     const shareUrl = data.share_url;
-                    messageBox.innerHTML = `<div class="success">✅ Your photo entry has been submitted successfully!<div class="share-buttons"><button class="btn-facebook" onclick="shareOnFacebook('${shareUrl}')">📱 Share on Facebook</button><button class="btn-copy" onclick="copyShareLink('${shareUrl}')">🔗 Copy Link</button></div></div>`;
+                    messageBox.innerHTML = `<div class="success">✅ Your campus photo has been submitted successfully!<div class="share-buttons"><button class="btn-facebook" onclick="shareOnFacebook('${shareUrl}')">📱 Share on Facebook</button><button class="btn-copy" onclick="copyShareLink('${shareUrl}')">🔗 Copy Link</button></div></div>`;
                     this.reset(); submitBtn.textContent = 'Submit Another Entry'; submitBtn.classList.remove('pulse');
                     setTimeout(() => { switchTab('view'); submitBtn.textContent = 'Submit Your Entry'; submitBtn.classList.add('pulse'); }, 3000);
                 } else { messageBox.innerHTML = `<div class="error">❌ ${data.error}</div>`; }
@@ -196,7 +215,7 @@
             try {
                 const response = await fetch('/api/images'); const entries = await response.json();
                 document.getElementById('entry-counter').innerHTML = `🏆 Total Entries: <strong>${entries.length}</strong>`;
-                if (entries.length === 0) { container.innerHTML = `<div class="loading"><p style="font-size: 3rem;">📸</p><p>No entries yet! Be the first to submit your photo.</p></div>`; return; }
+                if (entries.length === 0) { container.innerHTML = `<div class="loading"><p style="font-size: 3rem;">📸</p><p>No entries yet! Be the first to capture your campus moment.</p></div>`; return; }
                 const voteStatusPromises = entries.map(entry => fetch(`/api/vote/image/${entry.id}/status`).then(res => res.json()));
                 const voteStatuses = await Promise.all(voteStatusPromises);
                 container.innerHTML = entries.map((entry, index) => {
@@ -210,7 +229,7 @@
         function openImage(url, name, department, description, semester) {
             const modal = document.getElementById('image-modal'); const modalImg = document.getElementById('modal-image'); const modalInfo = document.getElementById('modal-info');
             modal.classList.add('active'); modalImg.src = url; modalImg.classList.remove('zoomed');
-            modalInfo.innerHTML = `<p><strong>Photographer:</strong> ${name}</p><p><strong>Department:</strong> ${department}</p><p><strong>Semester:</strong> ${semester}</p>${description ? `<p><em>"${description}"</em></p>` : ''}<p style="font-size: 0.9rem; opacity: 0.8;">Click image to zoom • Press ESC or X to close</p>`;
+            modalInfo.innerHTML = `<p><strong>📸 Photographer:</strong> ${name}</p><p><strong>📚 Department:</strong> ${department}</p><p><strong>🎓 Semester:</strong> ${semester}</p>${description ? `<p><em>"${description}"</em></p>` : ''}<p style="font-size: 0.9rem; opacity: 0.8;">Click image to zoom • Press ESC or X to close</p>`;
         }
         function closeModal() { document.getElementById('image-modal').classList.remove('active'); }
         function toggleZoom() { document.getElementById('modal-image').classList.toggle('zoomed'); }
