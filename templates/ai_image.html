@@ -103,18 +103,17 @@
         <div class="indian-flag-strip"></div>
         <div class="header">
             <a href="/" class="home-link">🏠 Home</a>
-            <h1>🇮🇳 WBSU AI Poster 2026</h1>
+            <h1>WBSU AI Poster 2026</h1>
             <p>Organized by ABVP</p>
             <p>Create with AI, Inspire with Vision</p>
         </div>
         <div class="competition-info">
             Theme: <strong>"Imagine India on 15th August 1947"</strong><br>
-            Deadline: August 14, 2026 | 🇮🇳 Independence Day Special
+            Deadline: August 14, 2026 | Independence Day Special
         </div>
         <div class="theme-description">
             <strong>🤖 Theme Description:</strong> <em>"১৫ই আগস্ট ১৯৪৭-এর ভারত, স্বাধীনতার ঐতিহাসিক মুহূর্ত, মানুষের আবেগ এবং সেই সময়ের পরিবেশকে নিজের কল্পনা ও Artificial Intelligence (AI)-এর সাহায্যে একটি সৃজনশীল Poster-এর মাধ্যমে তুলে ধরতে হবে।"</em><br><br>
-            <strong>English:</strong> Creatively portray India on 15th August 1947, the historic moment of independence, people's emotions, and the atmosphere of that time through your imagination and Artificial Intelligence (AI) in the form of a creative Poster.<br><br>
-            <strong>⚠️ Important:</strong> AI Prompt Submission is Mandatory
+            <strong>English:</strong> Creatively portray India on 15th August 1947, the historic moment of independence, people's emotions, and the atmosphere of that time through your imagination and Artificial Intelligence (AI) in the form of a creative Poster.
         </div>
         <div class="nav-tabs">
             <button class="nav-tab active" id="upload-tab" onclick="switchTab('submit')">🤖 Upload AI Poster</button>
@@ -124,15 +123,11 @@
             <div id="submit-page" class="page active">
                 <h2 class="page-title">Submit Your AI Generated Poster</h2>
                 <div class="rules-box">
-                    <h3>📋 Competition Rules</h3>
+                    <h3>📋 Rules</h3>
                     <ul>
-                        <li>Poster must be generated using AI tools (DALL-E, Midjourney, Stable Diffusion, etc.)</li>
-                        <li>Theme: <strong>Imagine India on 15th August 1947</strong></li>
-                        <li>Capture the independence moment, people's emotions & atmosphere</li>
-                        <li>Poster must be original AI generation</li>
+                        <li>Poster must be generated using AI tools</li>
                         <li>Accepted formats: JPG, PNG, GIF, WebP</li>
-                        <li>Multiple entries allowed per participant</li>
-                        <li><strong>AI Prompt submission is MANDATORY</strong></li>
+                        <li>Multiple entries allowed</li>
                     </ul>
                 </div>
                 <div id="message-box"></div>
@@ -141,8 +136,6 @@
                     <div class="form-group"><label for="mobile">Contact Number *</label><input type="tel" id="mobile" name="mobile" required pattern="[0-9]{10}" placeholder="10-digit mobile number" maxlength="10"></div>
                     <div class="form-group"><label for="department">Department *</label><input type="text" id="department" name="department" required placeholder="Enter your department"></div>
                     <div class="form-group"><label for="semester">Semester *</label><input type="text" id="semester" name="semester" required placeholder="Enter your semester"></div>
-                    <div class="form-group"><label for="ai_tool">AI Tool Used *</label><input type="text" id="ai_tool" name="ai_tool" required placeholder="e.g., DALL-E, Midjourney, Stable Diffusion, etc."></div>
-                    <div class="form-group"><label for="ai_prompt">AI Prompt Used * (MANDATORY)</label><textarea id="ai_prompt" name="ai_prompt" required placeholder="Paste the exact AI prompt you used to generate this poster..." rows="4"></textarea></div>
                     <div class="form-group"><label for="photo_description">Poster Description *</label><textarea id="photo_description" name="photo_description" placeholder="Describe your poster - what does it show about India's independence moment?" rows="4"></textarea></div>
                     <div class="form-group"><label>Upload Your AI Generated Poster *</label><div class="file-upload" onclick="document.getElementById('photo').click()"><p style="font-size: 2rem;">🤖</p><p style="font-weight: 600; color: #ffa500;">Select Your AI Poster</p><p style="font-size: 0.85rem;">Generated using AI - JPG, PNG, GIF, WebP</p><input type="file" id="photo" name="photo" accept="image/*" required></div></div>
                     <button type="submit" class="btn pulse">Submit AI Poster</button>
@@ -155,7 +148,7 @@
                 <div id="students-container" class="photos-grid"><div class="loading">Loading AI poster gallery...</div></div>
             </div>
         </div>
-        <div class="footer">This site developed by <span>Coding Hub - Duttapukur</span> | 🇮🇳 Jai Hind</div>
+        <div class="footer">This site developed by <span>Coding Hub - Duttapukur</span></div>
         <div class="indian-flag-strip"></div>
     </div>
     <div id="image-modal" class="modal"><span class="close-btn" onclick="closeModal()">&times;</span><img id="modal-image" src="" alt="Zoomed AI poster" onclick="toggleZoom()"><div class="modal-info" id="modal-info"></div></div>
@@ -186,14 +179,6 @@
         document.getElementById('ai-image-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const formData = new FormData(this); const messageBox = document.getElementById('message-box'); const submitBtn = this.querySelector('.btn');
-            
-            // Validate AI prompt is provided
-            const aiPrompt = document.getElementById('ai_prompt').value.trim();
-            if (!aiPrompt) {
-                messageBox.innerHTML = '<div class="error">❌ AI Prompt is mandatory! Please provide the prompt you used.</div>';
-                return;
-            }
-            
             submitBtn.disabled = true; submitBtn.textContent = 'Submitting...';
             try {
                 const response = await fetch('/api/ai-images', { method: 'POST', body: formData }); const data = await response.json();
@@ -226,16 +211,16 @@
                 const voteStatuses = await Promise.all(voteStatusPromises);
                 container.innerHTML = entries.map((entry, index) => {
                     const voteStatus = voteStatuses[index]; const userVote = voteStatus.user_vote;
-                    return `<div class="photo-card" data-entry-id="${entry.id}"><img src="${entry.photo_url}" alt="AI Poster by ${entry.name}" class="photo-image" onclick="openImage('${entry.photo_url}', '${escapeHtml(entry.name)}', '${escapeHtml(entry.department)}', '${escapeHtml(entry.photo_description || '')}', '${escapeHtml(entry.semester)}', '${escapeHtml(entry.ai_tool || '')}', '${escapeHtml(entry.ai_prompt || '')}')" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22250%22><rect fill=%22%233a2f1a%22 width=%22300%22 height=%22250%22/><text fill=%22%23b8956a%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'"><div class="photo-details"><h3>🤖 ${escapeHtml(entry.name)}</h3><p>📚 Department: ${escapeHtml(entry.department)}</p><p>🎓 Semester: ${escapeHtml(entry.semester)}</p>${entry.ai_tool ? `<p>🛠️ AI Tool: ${escapeHtml(entry.ai_tool)}</p>` : ''}${entry.photo_description ? `<div class="description">💬 ${escapeHtml(entry.photo_description)}</div>` : ''}<div class="vote-section"><button class="vote-btn like-btn ${userVote === 'like' ? 'active-like' : ''}" onclick="vote(${entry.id}, 'like')"><span class="vote-icon">👍</span><span>Like</span><span class="vote-count">${entry.likes}</span></button><button class="share-btn-small" onclick="shareOnFacebook('${window.location.origin}/post/ai-image/${entry.id}')">📱 Share</button></div></div></div>`;
+                    return `<div class="photo-card" data-entry-id="${entry.id}"><img src="${entry.photo_url}" alt="AI Poster by ${entry.name}" class="photo-image" onclick="openImage('${entry.photo_url}', '${escapeHtml(entry.name)}', '${escapeHtml(entry.department)}', '${escapeHtml(entry.photo_description || '')}', '${escapeHtml(entry.semester)}')" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22250%22><rect fill=%22%233a2f1a%22 width=%22300%22 height=%22250%22/><text fill=%22%23b8956a%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'"><div class="photo-details"><h3>🤖 ${escapeHtml(entry.name)}</h3><p>📚 Department: ${escapeHtml(entry.department)}</p><p>🎓 Semester: ${escapeHtml(entry.semester)}</p>${entry.photo_description ? `<div class="description">💬 ${escapeHtml(entry.photo_description)}</div>` : ''}<div class="vote-section"><button class="vote-btn like-btn ${userVote === 'like' ? 'active-like' : ''}" onclick="vote(${entry.id}, 'like')"><span class="vote-icon">👍</span><span>Like</span><span class="vote-count">${entry.likes}</span></button><button class="share-btn-small" onclick="shareOnFacebook('${window.location.origin}/post/ai-image/${entry.id}')">📱 Share</button></div></div></div>`;
                 }).join('');
             } catch (error) { container.innerHTML = '<div class="error">Failed to load gallery. Please try again later.</div>'; }
         }
 
         function escapeHtml(text) { const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
-        function openImage(url, name, department, description, semester, aiTool, aiPrompt) {
+        function openImage(url, name, department, description, semester) {
             const modal = document.getElementById('image-modal'); const modalImg = document.getElementById('modal-image'); const modalInfo = document.getElementById('modal-info');
             modal.classList.add('active'); modalImg.src = url; modalImg.classList.remove('zoomed');
-            modalInfo.innerHTML = `<p><strong>🤖 AI Artist:</strong> ${name}</p><p><strong>📚 Department:</strong> ${department}</p><p><strong>🎓 Semester:</strong> ${semester}</p>${aiTool ? `<p><strong>🛠️ AI Tool:</strong> ${aiTool}</p>` : ''}${aiPrompt ? `<p><strong>📝 AI Prompt:</strong> <em>"${aiPrompt}"</em></p>` : ''}${description ? `<p><em>"${description}"</em></p>` : ''}<p style="font-size: 0.9rem; opacity: 0.8;">Click image to zoom • Press ESC or X to close</p>`;
+            modalInfo.innerHTML = `<p><strong>🤖 AI Artist:</strong> ${name}</p><p><strong>📚 Department:</strong> ${department}</p><p><strong>🎓 Semester:</strong> ${semester}</p>${description ? `<p><em>"${description}"</em></p>` : ''}<p style="font-size: 0.9rem; opacity: 0.8;">Click image to zoom • Press ESC or X to close</p>`;
         }
         function closeModal() { document.getElementById('image-modal').classList.remove('active'); }
         function toggleZoom() { document.getElementById('modal-image').classList.toggle('zoomed'); }
