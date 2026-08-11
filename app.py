@@ -65,6 +65,8 @@ class AiImageEntry(db.Model):
     mobile = db.Column(db.String(15), nullable=False)
     department = db.Column(db.String(100), nullable=False)
     semester = db.Column(db.String(50), nullable=False)
+    ai_tool = db.Column(db.String(100), default='')  # NEW FIELD
+    ai_prompt = db.Column(db.Text, default='')  # NEW FIELD
     photo_description = db.Column(db.Text, default='')
     photo_filename = db.Column(db.String(255), nullable=False)
     thumbnail_filename = db.Column(db.String(255), nullable=True)
@@ -82,6 +84,8 @@ class AiImageEntry(db.Model):
             'mobile': self.mobile,
             'department': self.department,
             'semester': self.semester,
+            'ai_tool': self.ai_tool,  # NEW
+            'ai_prompt': self.ai_prompt,  # NEW
             'photo_description': self.photo_description,
             'photo_url': url_for('get_ai_image', filename=self.photo_filename, _external=True),
             'thumbnail_url': url_for('get_thumbnail', filename=self.thumbnail_filename, _external=True) if self.thumbnail_filename else url_for('get_ai_image', filename=self.photo_filename, _external=True),
@@ -96,6 +100,7 @@ class ReelEntry(db.Model):
     mobile = db.Column(db.String(15), nullable=False)
     department = db.Column(db.String(100), nullable=False)
     semester = db.Column(db.String(50), nullable=False)
+    reel_category = db.Column(db.String(20), default='others')  # NEW FIELD
     reel_description = db.Column(db.Text, default='')
     reel_filename = db.Column(db.String(255), nullable=False)
     thumbnail_filename = db.Column(db.String(255), nullable=True)
@@ -113,6 +118,7 @@ class ReelEntry(db.Model):
             'mobile': self.mobile,
             'department': self.department,
             'semester': self.semester,
+            'reel_category': self.reel_category,  # NEW
             'reel_description': self.reel_description,
             'reel_url': url_for('get_reel', filename=self.reel_filename, _external=True),
             'thumbnail_url': url_for('get_thumbnail', filename=self.thumbnail_filename, _external=True) if self.thumbnail_filename else None,
@@ -201,6 +207,48 @@ def create_video_thumbnail(video_path, thumbnail_path, size=(600, 315)):
             return True
         except:
             return False
+
+def get_video_duration(video_path):
+    """Get video duration in seconds using ffprobe"""
+    try:
+        cmd = [
+            'ffprobe', 
+            '-v', 'error', 
+            '-show_entries', 'format=duration', 
+            '-of', 'default=noprint_wrappers=1:nokey=1', 
+            video_path
+        ]
+        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        return float(result.stdout.strip())
+    except:
+        return None
+
+def migrate_database():
+    """Add new columns to existing database if they don't exist"""
+    with app.app_context():
+        # Check and add ai_tool column to ai_image_entry
+        try:
+            db.session.execute(db.text('ALTER TABLE ai_image_entry ADD COLUMN ai_tool VARCHAR(100) DEFAULT ""'))
+            db.session.commit()
+            print("✅ Added ai_tool column to ai_image_entry")
+        except Exception as e:
+            pass  # Column already exists
+        
+        # Check and add ai_prompt column to ai_image_entry
+        try:
+            db.session.execute(db.text('ALTER TABLE ai_image_entry ADD COLUMN ai_prompt TEXT DEFAULT ""'))
+            db.session.commit()
+            print("✅ Added ai_prompt column to ai_image_entry")
+        except Exception as e:
+            pass  # Column already exists
+        
+        # Check and add reel_category column to reel_entry
+        try:
+            db.session.execute(db.text('ALTER TABLE reel_entry ADD COLUMN reel_category VARCHAR(20) DEFAULT "others"'))
+            db.session.commit()
+            print("✅ Added reel_category column to reel_entry")
+        except Exception as e:
+            pass  # Column already exists
 
 # Routes
 @app.route('/')
@@ -325,9 +373,14 @@ def add_ai_image():
         mobile = request.form.get('mobile', '').strip()
         department = request.form.get('department', '').strip()
         semester = request.form.get('semester', '').strip()
+        ai_tool = request.form.get('ai_tool', '').strip()  # NEW
+        ai_prompt = request.form.get('ai_prompt', '').strip()  # NEW
         photo_description = request.form.get('photo_description', '').strip()
         if not all([name, mobile, department, semester]):
             return jsonify({'error': 'All fields are required'}), 400
+        # Validate AI prompt is mandatory
+        if not ai_prompt:
+            return jsonify({'error': 'AI Prompt is mandatory for submission'}), 400
         if not mobile.isdigit() or len(mobile) != 10:
             return jsonify({'error': 'Mobile number must be 10 digits'}), 400
         original_filename = secure_filename(file.filename)
@@ -339,6 +392,7 @@ def add_ai_image():
         thumbnail_path = os.path.join(app.config['UPLOAD_FOLDER_THUMBNAILS'], thumbnail_filename)
         create_image_thumbnail(file_path, thumbnail_path)
         entry = AiImageEntry(name=name, mobile=mobile, department=department, semester=semester,
+                            ai_tool=ai_tool, ai_prompt=ai_prompt,  # NEW FIELDS
                             photo_description=photo_description, photo_filename=unique_filename,
                             thumbnail_filename=thumbnail_filename)
         db.session.add(entry)
@@ -396,9 +450,14 @@ def add_reel():
         mobile = request.form.get('mobile', '').strip()
         department = request.form.get('department', '').strip()
         semester = request.form.get('semester', '').strip()
+        reel_category = request.form.get('reel_category', 'others').strip()  # NEW
         reel_description = request.form.get('reel_description', '').strip()
         if not all([name, mobile, department, semester]):
             return jsonify({'error': 'All fields are required'}), 400
+        # Validate reel category
+        valid_categories = ['singing', 'dancing', 'speech', 'others']
+        if reel_category not in valid_categories:
+            return jsonify({'error': f'Invalid category. Must be one of: {", ".join(valid_categories)}'}), 400
         if not mobile.isdigit() or len(mobile) != 10:
             return jsonify({'error': 'Mobile number must be 10 digits'}), 400
         original_filename = secure_filename(file.filename)
@@ -407,9 +466,15 @@ def add_reel():
         thumbnail_filename = f"thumb_{uuid.uuid4().hex}.jpg"
         file_path = os.path.join(app.config['UPLOAD_FOLDER_REELS'], unique_filename)
         file.save(file_path)
+        # Optional: Check video duration (30-second limit)
+        duration = get_video_duration(file_path)
+        if duration and duration > 30:
+            os.remove(file_path)
+            return jsonify({'error': f'Video duration ({duration:.1f}s) exceeds the 30-second limit'}), 400
         thumbnail_path = os.path.join(app.config['UPLOAD_FOLDER_THUMBNAILS'], thumbnail_filename)
         create_video_thumbnail(file_path, thumbnail_path)
         entry = ReelEntry(name=name, mobile=mobile, department=department, semester=semester,
+                         reel_category=reel_category,  # NEW FIELD
                          reel_description=reel_description, reel_filename=unique_filename,
                          thumbnail_filename=thumbnail_filename)
         db.session.add(entry)
@@ -476,4 +541,6 @@ def not_found(e):
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
+        migrate_database()  # Run migration for new fields
+        print("✅ Database initialized and migrated successfully!")
     app.run(debug=True, host='0.0.0.0', port=5000)
