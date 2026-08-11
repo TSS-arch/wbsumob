@@ -373,14 +373,12 @@ def add_ai_image():
         mobile = request.form.get('mobile', '').strip()
         department = request.form.get('department', '').strip()
         semester = request.form.get('semester', '').strip()
-        ai_tool = request.form.get('ai_tool', '').strip()  # NEW
-        ai_prompt = request.form.get('ai_prompt', '').strip()  # NEW
+        
         photo_description = request.form.get('photo_description', '').strip()
         if not all([name, mobile, department, semester]):
             return jsonify({'error': 'All fields are required'}), 400
         # Validate AI prompt is mandatory
-        if not ai_prompt:
-            return jsonify({'error': 'AI Prompt is mandatory for submission'}), 400
+      
         if not mobile.isdigit() or len(mobile) != 10:
             return jsonify({'error': 'Mobile number must be 10 digits'}), 400
         original_filename = secure_filename(file.filename)
@@ -392,7 +390,6 @@ def add_ai_image():
         thumbnail_path = os.path.join(app.config['UPLOAD_FOLDER_THUMBNAILS'], thumbnail_filename)
         create_image_thumbnail(file_path, thumbnail_path)
         entry = AiImageEntry(name=name, mobile=mobile, department=department, semester=semester,
-                            ai_tool=ai_tool, ai_prompt=ai_prompt,  # NEW FIELDS
                             photo_description=photo_description, photo_filename=unique_filename,
                             thumbnail_filename=thumbnail_filename)
         db.session.add(entry)
@@ -450,14 +447,11 @@ def add_reel():
         mobile = request.form.get('mobile', '').strip()
         department = request.form.get('department', '').strip()
         semester = request.form.get('semester', '').strip()
-        reel_category = request.form.get('reel_category', 'others').strip()  # NEW
         reel_description = request.form.get('reel_description', '').strip()
         if not all([name, mobile, department, semester]):
             return jsonify({'error': 'All fields are required'}), 400
         # Validate reel category
-        valid_categories = ['singing', 'dancing', 'speech', 'others']
-        if reel_category not in valid_categories:
-            return jsonify({'error': f'Invalid category. Must be one of: {", ".join(valid_categories)}'}), 400
+       
         if not mobile.isdigit() or len(mobile) != 10:
             return jsonify({'error': 'Mobile number must be 10 digits'}), 400
         original_filename = secure_filename(file.filename)
@@ -474,7 +468,6 @@ def add_reel():
         thumbnail_path = os.path.join(app.config['UPLOAD_FOLDER_THUMBNAILS'], thumbnail_filename)
         create_video_thumbnail(file_path, thumbnail_path)
         entry = ReelEntry(name=name, mobile=mobile, department=department, semester=semester,
-                         reel_category=reel_category,  # NEW FIELD
                          reel_description=reel_description, reel_filename=unique_filename,
                          thumbnail_filename=thumbnail_filename)
         db.session.add(entry)
