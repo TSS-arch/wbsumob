@@ -269,19 +269,19 @@ def reels():
     
 @app.route('/wbsu')
 def homes():
-    return render_template('home.html')
+    return render_template('home_copy.html')
 
 @app.route('/mobography_copy')
 def mobographys():
-    return render_template('index.html')
+    return render_template('index_copy.html')
 
 @app.route('/ai-image_copy')
 def ai_images():
-    return render_template('ai_image.html')
+    return render_template('ai_image_copy.html')
 
 @app.route('/reels_copy')
 def reelss():
-    return render_template('reels.html')
+    return render_template('reels_copy.html')
 
 @app.route('/post/image/<int:post_id>')
 def view_image_post(post_id):
