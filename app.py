@@ -266,6 +266,22 @@ def ai_image():
 @app.route('/reels')
 def reels():
     return render_template('reels.html')
+    
+@app.route('/wbsu')
+def homes():
+    return render_template('home.html')
+
+@app.route('/mobography_copy')
+def mobographys():
+    return render_template('index.html')
+
+@app.route('/ai-image_copy')
+def ai_images():
+    return render_template('ai_image.html')
+
+@app.route('/reels_copy')
+def reelss():
+    return render_template('reels.html')
 
 @app.route('/post/image/<int:post_id>')
 def view_image_post(post_id):
