@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>WBSU AI Poster Competition 2026</title>
+    <meta property="og:title" content="WBSU AI Poster 2026">
+    <meta property="og:description" content="Imagine India on 15th August 1947 - AI Generated Poster Competition">
+    <meta property="og:type" content="website">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #1a120a; min-height: 100vh; padding: 10px; }
+        .container { max-width: 1000px; margin: 0 auto; background: #2a1f15; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(255, 165, 0, 0.1); overflow: hidden; border: 1px solid rgba(255, 165, 0, 0.2); }
+        .header { background: linear-gradient(135deg, #ff9933 0%, #ffffff 50%, #138808 100%); color: #1a1a1a; padding: 25px 15px; text-align: center; position: relative; overflow: hidden; }
+        .header::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%); animation: rotate 20s linear infinite; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .header h1 { font-size: clamp(1.5rem, 5vw, 2.5rem); margin-bottom: 5px; text-shadow: 0 0 20px rgba(0,0,0,0.3); line-height: 1.2; position: relative; z-index: 1; font-weight: 800; }
+        .header p { font-size: clamp(0.9rem, 3vw, 1.1rem); opacity: 0.95; position: relative; z-index: 1; font-weight: 600; }
+        .home-link { position: absolute; top: 15px; left: 15px; z-index: 2; color: #1a1a1a; text-decoration: none; font-size: 0.9rem; background: rgba(255, 255, 255, 0.3); padding: 5px 12px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.5); transition: all 0.3s; }
+        .home-link:hover { background: rgba(255, 255, 255, 0.5); }
+        .competition-info { background: linear-gradient(135deg, #ff9933 0%, #ffffff 50%, #138808 100%); color: #1a1a1a; padding: 12px 15px; text-align: center; font-weight: 700; font-size: clamp(0.75rem, 2.5vw, 1rem); line-height: 1.4; border-top: 1px solid rgba(0,0,0,0.1); border-bottom: 1px solid rgba(0,0,0,0.1); }
+        .theme-description { background: rgba(255, 165, 0, 0.08); padding: 15px; margin: 0 15px 20px 15px; border-radius: 10px; border: 1px solid rgba(255, 165, 0, 0.15); color: #e8cfa0; font-size: clamp(0.85rem, 2vw, 0.95rem); line-height: 1.6; }
+        .theme-description strong { color: #ffa500; }
+        .nav-tabs { display: flex; background: #3a2f1a; border-bottom: 2px solid rgba(255, 165, 0, 0.3); }
+        .nav-tab { flex: 1; padding: 12px 10px; text-align: center; cursor: pointer; font-weight: 600; color: #b8956a; transition: all 0.3s; border: none; background: none; font-size: clamp(0.85rem, 2.5vw, 1.1rem); position: relative; }
+        .nav-tab.active { color: #ffa500; background: #2a1f15; text-shadow: 0 0 10px rgba(255, 165, 0, 0.5); }
+        .nav-tab.active::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 3px; background: #ffa500; box-shadow: 0 0 10px rgba(255, 165, 0, 0.5); }
+        .content { padding: 20px 15px; background: #2a1f15; }
+        @media (min-width: 768px) { .content { padding: 30px; } }
+        .page { display: none; }
+        .page.active { display: block; }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; margin-bottom: 5px; font-weight: 600; color: #e8cfa0; font-size: clamp(0.85rem, 2vw, 1rem); }
+        input[type="text"], input[type="tel"], textarea { width: 100%; padding: 12px; border: 2px solid rgba(255, 165, 0, 0.3); border-radius: 8px; font-size: clamp(0.85rem, 2vw, 1rem); transition: all 0.3s; -webkit-appearance: none; appearance: none; background: #1a120a; color: #e8cfa0; }
+        input:focus, textarea:focus { outline: none; border-color: #ffa500; box-shadow: 0 0 15px rgba(255, 165, 0, 0.2); }
+        input::placeholder, textarea::placeholder { color: #6b5040; }
+        textarea { resize: vertical; min-height: 80px; }
+        .file-upload { border: 2px dashed rgba(255, 165, 0, 0.4); border-radius: 8px; padding: 20px 15px; text-align: center; cursor: pointer; transition: all 0.3s; background: rgba(255, 165, 0, 0.05); }
+        @media (min-width: 768px) { .file-upload { padding: 30px; } }
+        .file-upload:hover { background: rgba(255, 165, 0, 0.1); border-color: #ffa500; box-shadow: 0 0 20px rgba(255, 165, 0, 0.2); }
+        .file-upload input { display: none; }
+        .file-upload p { font-size: clamp(0.85rem, 2vw, 1rem); color: #b8956a; }
+        .btn { background: linear-gradient(135deg, #ff9933 0%, #ff8c00 50%, #138808 100%); color: white; padding: 15px 40px; border: none; border-radius: 50px; font-size: clamp(0.9rem, 2.5vw, 1.1rem); font-weight: 600; cursor: pointer; transition: all 0.3s; width: 100%; text-transform: uppercase; letter-spacing: 1px; -webkit-tap-highlight-color: transparent; box-shadow: 0 5px 20px rgba(255, 165, 0, 0.3); }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255, 140, 0, 0.4); }
+        .btn:active { transform: translateY(0); }
+        .photos-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media (min-width: 480px) { .photos-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; } }
+        @media (min-width: 768px) { .photos-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; } }
+        .photo-card { background: #3a2f1a; border: 1px solid rgba(255, 165, 0, 0.3); border-radius: 15px; overflow: hidden; transition: all 0.3s; box-shadow: 0 3px 10px rgba(0,0,0,0.2); display: flex; flex-direction: column; }
+        .photo-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255, 165, 0, 0.2); border-color: #ffa500; }
+        .photo-image { width: 100%; height: auto; max-height: 400px; object-fit: contain; cursor: pointer; transition: transform 0.3s; background: #1a120a; }
+        .photo-image:hover { transform: scale(1.02); }
+        .photo-details { padding: 15px; }
+        @media (min-width: 768px) { .photo-details { padding: 20px; } }
+        .photo-details h3 { color: #e8cfa0; margin-bottom: 8px; font-size: clamp(1rem, 2.5vw, 1.3rem); word-break: break-word; }
+        .photo-details p { color: #b8956a; margin-bottom: 6px; font-size: clamp(0.8rem, 2vw, 0.95rem); word-break: break-word; }
+        .photo-details .description { background: rgba(255, 165, 0, 0.1); padding: 10px; border-radius: 8px; margin-top: 10px; font-style: italic; color: #b8956a; font-size: clamp(0.8rem, 2vw, 0.9rem); word-break: break-word; border-left: 3px solid #ffa500; }
+        .vote-section { display: flex; align-items: center; gap: 15px; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255, 165, 0, 0.2); }
+        .vote-btn { display: flex; align-items: center; gap: 5px; padding: 8px 16px; border: 2px solid rgba(255, 165, 0, 0.3); border-radius: 25px; background: transparent; cursor: pointer; transition: all 0.3s; font-size: clamp(0.8rem, 2vw, 0.9rem); font-weight: 600; -webkit-tap-highlight-color: transparent; touch-action: manipulation; color: #b8956a; }
+        .vote-btn:hover { transform: scale(1.05); border-color: #ffa500; color: #ffa500; }
+        .vote-btn:active { transform: scale(0.95); }
+        .vote-btn.active-like { background: linear-gradient(135deg, #ffa500, #ff8c00); color: white; border-color: transparent; box-shadow: 0 0 15px rgba(255, 165, 0, 0.3); }
+        .vote-count { font-weight: 700; margin-left: 3px; }
+        .vote-icon { font-size: clamp(1rem, 2.5vw, 1.2rem); }
+        .share-btn-small { display: inline-flex; align-items: center; gap: 3px; padding: 6px 12px; border: 1px solid rgba(24, 119, 242, 0.5); border-radius: 20px; background: rgba(24, 119, 242, 0.1); cursor: pointer; transition: all 0.3s; font-size: 0.8rem; font-weight: 600; color: #1877f2; margin-left: auto; }
+        .share-btn-small:hover { background: rgba(24, 119, 242, 0.2); }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(26, 18, 10, 0.98); z-index: 1000; cursor: zoom-out; backdrop-filter: blur(10px); }
+        .modal.active { display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 20px; }
+        .modal img { max-width: 95%; max-height: 70vh; border-radius: 12px; cursor: zoom-in; transition: transform 0.4s; box-shadow: 0 20px 60px rgba(255, 165, 0, 0.3); object-fit: contain; border: 2px solid rgba(255, 165, 0, 0.3); }
+        .modal img.zoomed { transform: scale(2); cursor: zoom-out; }
+        .modal-info { color: #e8cfa0; text-align: center; margin-top: 20px; font-size: clamp(0.85rem, 2vw, 1.1rem); padding: 0 15px; }
+        .close-btn { position: fixed; top: 15px; right: 20px; color: #ffa500; font-size: 2.5rem; cursor: pointer; z-index: 1001; transition: all 0.3s; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255, 165, 0, 0.1); border-radius: 50%; border: 1px solid rgba(255, 165, 0, 0.3); }
+        @media (min-width: 768px) { .close-btn { top: 20px; right: 30px; font-size: 3rem; width: 50px; height: 50px; } }
+        .close-btn:hover { transform: scale(1.2); background: rgba(255, 165, 0, 0.2); box-shadow: 0 0 15px rgba(255, 165, 0, 0.3); }
+        .loading { text-align: center; padding: 40px 20px; color: #b8956a; font-size: clamp(0.9rem, 2vw, 1.2rem); grid-column: 1 / -1; }
+        .error { background: rgba(255, 87, 87, 0.1); color: #ff5757; padding: 12px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #ff5757; font-size: clamp(0.8rem, 2vw, 0.9rem); }
+        .success { background: rgba(255, 165, 0, 0.1); color: #ffa500; padding: 12px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #ffa500; font-size: clamp(0.8rem, 2vw, 0.9rem); }
+        .success .share-buttons { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+        .btn-facebook { background: #1877f2; color: white; padding: 10px 20px; border: none; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; }
+        .btn-copy { background: rgba(255, 165, 0, 0.2); color: #ffa500; padding: 10px 20px; border: 2px solid rgba(255, 165, 0, 0.3); border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; }
+        .rules-box { background: rgba(255, 165, 0, 0.05); border-radius: 12px; padding: 15px; margin-bottom: 20px; border: 1px solid rgba(255, 165, 0, 0.2); }
+        @media (min-width: 768px) { .rules-box { padding: 20px; margin-bottom: 25px; } }
+        .rules-box h3 { color: #ffa500; margin-bottom: 12px; font-size: clamp(1rem, 2.5vw, 1.2rem); }
+        .rules-box ul { list-style: none; padding: 0; }
+        .rules-box li { padding: 6px 0; color: #b8956a; font-size: clamp(0.8rem, 2vw, 0.95rem); line-height: 1.4; }
+        .rules-box li:before { content: "🤖 "; }
+        .counter { text-align: center; font-size: clamp(0.9rem, 2.5vw, 1.2rem); color: #ffa500; margin: 15px 0; font-weight: 600; text-shadow: 0 0 10px rgba(255, 165, 0, 0.3); }
+        .page-title { color: #ffa500; font-size: clamp(1.2rem, 3vw, 1.5rem); margin-bottom: 15px; text-shadow: 0 0 10px rgba(255, 165, 0, 0.3); }
+        .footer { background: linear-gradient(135deg, #ff9933 0%, #ffffff 50%, #138808 100%); color: #1a1a1a; text-align: center; padding: 15px; font-size: clamp(0.75rem, 2vw, 0.9rem); border-top: 1px solid rgba(0,0,0,0.1); }
+        .footer span { color: #ff8c00; font-weight: 600; }
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
+        .vote-animation { animation: pop 0.3s ease; }
+        .toast-message { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #ffa500; color: white; padding: 10px 20px; border-radius: 25px; font-weight: 600; z-index: 1000; animation: slideDown 0.3s ease; }
+        @keyframes slideDown { from { transform: translate(-50%, -100%); } to { transform: translate(-50%, 0); } }
+        .indian-flag-strip { height: 4px; background: linear-gradient(90deg, #ff9933 33.33%, #ffffff 33.33%, #ffffff 66.66%, #138808 66.66%); }
+        @media (max-width: 480px) { body { padding: 5px; } .container { border-radius: 12px; } .header h1 { font-size: 1.3rem; } .content { padding: 15px 12px; } .form-group { margin-bottom: 15px; } input[type="text"], input[type="tel"], textarea { padding: 10px; font-size: 0.9rem; } .file-upload { padding: 15px; } .btn { padding: 12px 30px; } .photo-details { padding: 12px; } .vote-btn { padding: 6px 12px; } .theme-description { margin: 0 10px 15px 10px; padding: 12px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="indian-flag-strip"></div>
+        <div class="header">
+            <a href="/" class="home-link">🏠 Home</a>
+            <h1>WBSU AI Poster 2026</h1>
+            <p>Organized by ABVP</p>
+            <p>Create with AI, Inspire with Vision</p>
+        </div>
+        <div class="competition-info">
+            Theme: <strong>"Imagine India on 15th August 1947"</strong><br>
+            Deadline: August 14, 2026 | Independence Day Special
+        </div>
+        <div class="theme-description">
+            <strong>🤖 Theme Description:</strong> <em>"১৫ই আগস্ট ১৯৪৭-এর ভারত, স্বাধীনতার ঐতিহাসিক মুহূর্ত, মানুষের আবেগ এবং সেই সময়ের পরিবেশকে নিজের কল্পনা ও Artificial Intelligence (AI)-এর সাহায্যে একটি সৃজনশীল Poster-এর মাধ্যমে তুলে ধরতে হবে।"</em><br><br>
+            <strong>English:</strong> Creatively portray India on 15th August 1947, the historic moment of independence, people's emotions, and the atmosphere of that time through your imagination and Artificial Intelligence (AI) in the form of a creative Poster.
+        </div>
+        <div class="nav-tabs">
+            <button class="nav-tab active" id="upload-tab" onclick="switchTab('submit')">🤖 Upload AI Poster</button>
+            <button class="nav-tab" id="view-tab" onclick="switchTab('view')">🖼️ View Gallery</button>
+        </div>
+        <div class="content">
+            <div id="submit-page" class="page active">
+                <h2 class="page-title">Submit Your AI Generated Poster</h2>
+                <div class="rules-box">
+                    <h3>📋 Rules</h3>
+                    <ul>
+                        <li>Poster must be generated using AI tools</li>
+                        <li>Accepted formats: JPG, PNG, GIF, WebP</li>
+                        <li>Multiple entries allowed</li>
+                    </ul>
+                </div>
+                <div id="message-box"></div>
+                <form id="ai-image-form" enctype="multipart/form-data">
+                    <div class="form-group"><label for="name">Participant Name *</label><input type="text" id="name" name="name" required placeholder="Enter your full name"></div>
+                    <div class="form-group"><label for="mobile">Contact Number *</label><input type="tel" id="mobile" name="mobile" required pattern="[0-9]{10}" placeholder="10-digit mobile number" maxlength="10"></div>
+                    <div class="form-group"><label for="department">Department *</label><input type="text" id="department" name="department" required placeholder="Enter your department"></div>
+                    <div class="form-group"><label for="semester">Semester *</label><input type="text" id="semester" name="semester" required placeholder="Enter your semester"></div>
+                    <div class="form-group"><label for="photo_description">Poster Description *</label><textarea id="photo_description" name="photo_description" placeholder="Describe your poster - what does it show about India's independence moment?" rows="4"></textarea></div>
+                    <div class="form-group"><label>Upload Your AI Generated Poster *</label><div class="file-upload" onclick="document.getElementById('photo').click()"><p style="font-size: 2rem;">🤖</p><p style="font-weight: 600; color: #ffa500;">Select Your AI Poster</p><p style="font-size: 0.85rem;">Generated using AI - JPG, PNG, GIF, WebP</p><input type="file" id="photo" name="photo" accept="image/*" required></div></div>
+                    <button type="submit" class="btn pulse">Deadline Over</button>
+                </form>
+            </div>
+            <div id="view-page" class="page">
+                <h2 class="page-title">AI Independence Day Poster Gallery</h2>
+                <p style="margin-bottom: 20px; color: #b8956a; font-size: clamp(0.85rem, 2vw, 1rem);">Click on any poster to view it in full resolution</p>
+                <div class="counter" id="entry-counter"></div>
+                <div id="students-container" class="photos-grid"><div class="loading">Loading AI poster gallery...</div></div>
+            </div>
+        </div>
+        <div class="footer">This site developed by <span>Coding Hub - Duttapukur</span></div>
+        <div class="indian-flag-strip"></div>
+    </div>
+    <div id="image-modal" class="modal"><span class="close-btn" onclick="closeModal()">&times;</span><img id="modal-image" src="" alt="Zoomed AI poster" onclick="toggleZoom()"><div class="modal-info" id="modal-info"></div></div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const viewOnly = urlParams.get('view') === 'only';
+        
+        if (viewOnly) {
+            document.getElementById('upload-tab').style.display = 'none';
+            document.getElementById('view-tab').classList.add('active');
+            document.getElementById('submit-page').classList.remove('active');
+            document.getElementById('view-page').classList.add('active');
+            loadEntries();
+        }
+
+        function switchTab(tab) {
+            if (viewOnly && tab === 'submit') return;
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            if (tab === 'submit') { document.getElementById('upload-tab').classList.add('active'); document.getElementById('submit-page').classList.add('active'); }
+            else { document.getElementById('view-tab').classList.add('active'); document.getElementById('view-page').classList.add('active'); loadEntries(); }
+        }
+
+        function shareOnFacebook(url) { window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400'); }
+        function copyShareLink(url) { navigator.clipboard.writeText(url).then(() => { showToast('✅ Link copied! Share it with friends!'); }); }
+        function showToast(message) { const toast = document.createElement('div'); toast.className = 'toast-message'; toast.textContent = message; document.body.appendChild(toast); setTimeout(() => toast.remove(), 2000); }
+
+        document.getElementById('ai-image-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this); const messageBox = document.getElementById('message-box'); const submitBtn = this.querySelector('.btn');
+            submitBtn.disabled = true; submitBtn.textContent = 'Submitting...';
+            try {
+                const response = await fetch('/api/ai-images', { method: 'POST', body: formData }); const data = await response.json();
+                if (response.ok) {
+                    const shareUrl = data.share_url;
+                    messageBox.innerHTML = `<div class="success">✅ Your AI Independence Day poster has been submitted successfully! 🇮🇳<div class="share-buttons"><button class="btn-facebook" onclick="shareOnFacebook('${shareUrl}')">📱 Share on Facebook</button><button class="btn-copy" onclick="copyShareLink('${shareUrl}')">🔗 Copy Link</button></div></div>`;
+                    this.reset(); submitBtn.textContent = 'Submit Another Poster'; submitBtn.classList.remove('pulse');
+                    setTimeout(() => { switchTab('view'); submitBtn.textContent = 'Submit AI Poster'; submitBtn.classList.add('pulse'); }, 3000);
+                } else { messageBox.innerHTML = `<div class="error">❌ ${data.error}</div>`; }
+            } catch (error) { messageBox.innerHTML = '<div class="error">❌ Network error. Please try again.</div>'; }
+            finally { submitBtn.disabled = false; }
+        });
+
+        async function vote(entryId, voteType) {
+            try {
+                const response = await fetch(`/api/vote/ai-image/${entryId}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ vote_type: voteType }) });
+                const data = await response.json();
+                if (response.ok) { await loadEntries(); setTimeout(() => { const card = document.querySelector(`[data-entry-id="${entryId}"]`); if (card) { const voteBtn = card.querySelector(`.${voteType}-btn`); if (voteBtn && data.user_vote === voteType) { voteBtn.classList.add('vote-animation'); setTimeout(() => voteBtn.classList.remove('vote-animation'), 300); } } }, 100); }
+                else { alert(data.error || 'Failed to vote'); }
+            } catch (error) { alert('Network error. Please try again.'); }
+        }
+
+        async function loadEntries() {
+            const container = document.getElementById('students-container');
+            try {
+                const response = await fetch('/api/ai-images'); const entries = await response.json();
+                document.getElementById('entry-counter').innerHTML = `🇮🇳 Total AI Poster Entries: <strong>${entries.length}</strong>`;
+                if (entries.length === 0) { container.innerHTML = `<div class="loading"><p style="font-size: 3rem;">🤖</p><p>No AI posters yet! Be the first to imagine India's independence.</p></div>`; return; }
+                const voteStatusPromises = entries.map(entry => fetch(`/api/vote/ai-image/${entry.id}/status`).then(res => res.json()));
+                const voteStatuses = await Promise.all(voteStatusPromises);
+                container.innerHTML = entries.map((entry, index) => {
+                    const voteStatus = voteStatuses[index]; const userVote = voteStatus.user_vote;
+                    return `<div class="photo-card" data-entry-id="${entry.id}"><img src="${entry.photo_url}" alt="AI Poster by ${entry.name}" class="photo-image" onclick="openImage('${entry.photo_url}', '${escapeHtml(entry.name)}','${escapeHtml(entry.mobile)}','${escapeHtml(entry.department)}', '${escapeHtml(entry.photo_description || '')}', '${escapeHtml(entry.semester)}')" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22250%22><rect fill=%22%233a2f1a%22 width=%22300%22 height=%22250%22/><text fill=%22%23b8956a%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>No Image</text></svg>'"><div class="photo-details"><h3>🤖 ${escapeHtml(entry.name)}</h3><p>📚 Department: ${escapeHtml(entry.department)}</p><p>🎓 Semester: ${escapeHtml(entry.semester)}</p>${entry.photo_description ? `<div class="description">💬 ${escapeHtml(entry.photo_description)}</div>` : ''}<div class="vote-section"><button class="vote-btn like-btn ${userVote === 'like' ? 'active-like' : ''}" onclick="vote(${entry.id}, 'like')"><span class="vote-icon">👍</span><span>Like</span><span class="vote-count">${entry.likes}</span></button><button class="share-btn-small" onclick="shareOnFacebook('${window.location.origin}/post/ai-image/${entry.id}')">📱 Share</button></div></div></div>`;
+                }).join('');
+            } catch (error) { container.innerHTML = '<div class="error">Failed to load gallery. Please try again later.</div>'; }
+        }
+
+        function escapeHtml(text) { const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
+        function openImage(url, name, department, description, semester) {
+            const modal = document.getElementById('image-modal'); const modalImg = document.getElementById('modal-image'); const modalInfo = document.getElementById('modal-info');
+            modal.classList.add('active'); modalImg.src = url; modalImg.classList.remove('zoomed');
+            modalInfo.innerHTML = `<p><strong>🤖 AI Artist:</strong> ${name}</p><p><strong>📚 Department:</strong> ${department}</p><p><strong>🎓 Semester:</strong> ${semester}</p>${description ? `<p><em>"${description}"</em></p>` : ''}<p style="font-size: 0.9rem; opacity: 0.8;">Click image to zoom • Press ESC or X to close</p>`;
+        }
+        function closeModal() { document.getElementById('image-modal').classList.remove('active'); }
+        function toggleZoom() { document.getElementById('modal-image').classList.toggle('zoomed'); }
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+        document.getElementById('image-modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+        const fileUpload = document.querySelector('.file-upload');
+        fileUpload.addEventListener('dragover', function(e) { e.preventDefault(); this.style.background = 'rgba(255, 165, 0, 0.15)'; });
+        fileUpload.addEventListener('dragleave', function(e) { e.preventDefault(); this.style.background = 'rgba(255, 165, 0, 0.05)'; });
+        fileUpload.addEventListener('drop', function(e) { e.preventDefault(); this.style.background = 'rgba(255, 165, 0, 0.05)'; const files = e.dataTransfer.files; if (files.length > 0) { document.getElementById('photo').files = files; document.getElementById('photo').dispatchEvent(new Event('change')); } });
+    </script>
+</body>
+</html>
