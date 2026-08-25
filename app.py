@@ -299,10 +299,28 @@ def view_reel_post(post_id):
     return render_template('post_view.html', entry=entry.to_dict(), post_type='reel')
 
 # API Routes
+from sqlalchemy import func
+
 @app.route('/api/images', methods=['GET'])
 def get_images():
-    entries = ImageEntry.query.order_by(ImageEntry.created_at.desc()).all()
-    return jsonify([entry.to_dict() for entry in entries])
+    entries = db.session.query(
+        ImageEntry,
+        func.count(ImageVote.id).label('like_count')
+    ).outerjoin(
+        ImageVote, ImageEntry.id == ImageVote.entry_id
+    ).group_by(
+        ImageEntry.id
+    ).order_by(
+        func.count(ImageVote.id).desc()
+    ).all()
+    
+    result = []
+    for entry, like_count in entries:
+        data = entry.to_dict()
+        data['likes'] = like_count
+        result.append(data)
+    
+    return jsonify(result)
 
 @app.route('/api/images', methods=['POST'])
 def add_image():
@@ -370,10 +388,28 @@ def get_image_vote_status(entry_id):
     existing_vote = ImageVote.query.filter_by(entry_id=entry_id, ip_address=client_ip).first()
     return jsonify({'user_vote': existing_vote.vote_type if existing_vote else None})
 
+from sqlalchemy import func
+
 @app.route('/api/ai-images', methods=['GET'])
 def get_ai_images():
-    entries = AiImageEntry.query.order_by(AiImageEntry.created_at.desc()).all()
-    return jsonify([entry.to_dict() for entry in entries])
+    entries = db.session.query(
+        AiImageEntry,
+        func.count(AiImageVote.id).label('like_count')
+    ).outerjoin(
+        AiImageVote, AiImageEntry.id == AiImageVote.entry_id
+    ).group_by(
+        AiImageEntry.id
+    ).order_by(
+        func.count(AiImageVote.id).desc()
+    ).all()
+    
+    result = []
+    for entry, like_count in entries:
+        data = entry.to_dict()
+        data['likes'] = like_count
+        result.append(data)
+    
+    return jsonify(result)
 
 @app.route('/api/ai-images', methods=['POST'])
 def add_ai_image():
@@ -444,10 +480,28 @@ def get_ai_image_vote_status(entry_id):
     existing_vote = AiImageVote.query.filter_by(entry_id=entry_id, ip_address=client_ip).first()
     return jsonify({'user_vote': existing_vote.vote_type if existing_vote else None})
 
+from sqlalchemy import func
+
 @app.route('/api/reels', methods=['GET'])
 def get_reels():
-    entries = ReelEntry.query.order_by(ReelEntry.created_at.desc()).all()
-    return jsonify([entry.to_dict() for entry in entries])
+    entries = db.session.query(
+        ReelEntry,
+        func.count(ReelVote.id).label('like_count')
+    ).outerjoin(
+        ReelVote, ReelEntry.id == ReelVote.entry_id
+    ).group_by(
+        ReelEntry.id
+    ).order_by(
+        func.count(ReelVote.id).desc()
+    ).all()
+    
+    result = []
+    for entry, like_count in entries:
+        data = entry.to_dict()
+        data['likes'] = like_count
+        result.append(data)
+    
+    return jsonify(result)
 
 @app.route('/api/reels', methods=['POST'])
 def add_reel():
