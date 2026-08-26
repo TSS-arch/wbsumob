@@ -380,7 +380,7 @@ def vote_image(entry_id):
     #     return jsonify({'message': 'Vote added', 'entry': entry.to_dict(), 'user_vote': vote_type}), 200
     # except Exception as e:
     #     db.session.rollback()
-    return jsonify({'error':'VOTE SESSION HAS ENDED'), 500
+    return jsonify({'error':'VOTE SESSION HAS ENDED'}), 500
 
 @app.route('/api/vote/image/<int:entry_id>/status', methods=['GET'])
 def get_image_vote_status(entry_id):
@@ -454,7 +454,7 @@ def add_ai_image():
 
 @app.route('/api/vote/ai-image/<int:entry_id>', methods=['POST'])
 def vote_ai_image(entry_id):
-   return jsonify({'error':'VOTE SESSION HAS ENDED'), 500
+   return jsonify({'error':'VOTE SESSION HAS ENDED'}), 500
 
 @app.route('/api/vote/ai-image/<int:entry_id>/status', methods=['GET'])
 def get_ai_image_vote_status(entry_id):
@@ -533,7 +533,7 @@ def add_reel():
 @app.route('/api/vote/reel/<int:entry_id>', methods=['POST'])
 def vote_reel(entry_id):
    
-    return jsonify({'error':'VOTE SESSION HAS ENDED'), 500
+    return jsonify({'error':'VOTE SESSION HAS ENDED'}), 500
 
 @app.route('/api/vote/reel/<int:entry_id>/status', methods=['GET'])
 def get_reel_vote_status(entry_id):
